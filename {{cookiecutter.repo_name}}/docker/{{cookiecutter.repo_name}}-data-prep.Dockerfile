@@ -37,7 +37,10 @@ ENV LC_ALL "C.UTF-8"
 USER ${NON_ROOT_USER}
 WORKDIR ${HOME_DIR}
 
-COPY --chown=${NON_ROOT_USER}:${NON_ROOT_GID} ${REPO_DIR} {{cookiecutter.repo_name}}
+RUN mkdir -p ${HOME_DIR}/{{cookiecutter.repo-name}} && \
+    chown ${NON_ROOT_USER}:${NON_ROOT_GID} ${HOME_DIR}/{{cookiecutter.repo_name}}
+
+COPY --chown=${NON_ROOT_USER}:${NON_ROOT_GID} ${REPO_DIR}/${CONDA_ENV_FILE} {{cookiecutter.repo_name}}/${CONDA_ENV_FILE}
 
 # Install Miniconda
 RUN curl -O https://repo.anaconda.com/miniconda/$MINICONDA_SH && \
@@ -51,3 +54,5 @@ RUN ${CONDA_BIN} env create -f {{cookiecutter.repo_name}}/${CONDA_ENV_FILE} && \
     ${CONDA_BIN} init bash && \
     ${CONDA_BIN} clean -a -y && \
     echo "source activate ${CONDA_ENV_NAME}" >> "${HOME_DIR}/.bashrc"
+
+COPY --chown=${NON_ROOT_USER}:${NON_ROOT_GID} ${REPO_DIR}/src/ ${REPO_DIR}/conf/ {{cookiecutter.repo_name}}/
