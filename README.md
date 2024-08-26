@@ -1,3 +1,6 @@
+# NOTICE: This cookiecutter template has been ***DEPRECATED***.
+# Please use the new template at https://github.com/aisingapore/kapitan-hull.
+
 # AI Singapore's Cookiecutter Template for End-to-end ML Projects (On-prem | Run:ai)
 
 ![AI Singapore's Kapitan Hull EPTG Onprem Run:ai Banner](./assets/kapitan-hull-eptg-onprem-runai-banner.png)
